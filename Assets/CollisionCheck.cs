@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     [SerializeField] GameObject _target;
-    bool _isSocket;
+    public bool _isSocket;
 
     private void Awake()
     {
@@ -14,8 +14,8 @@ public class CollisionCheck : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collision collider = _target.GetComponent<Collision>();
-        if (collision == collider)
+        
+        if (collision.gameObject == _target)
         {
             _isSocket = true;
         }
@@ -23,8 +23,8 @@ public class CollisionCheck : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        Collision collider = _target.GetComponent<Collision>();
-        if (collision == collider)
+        
+        if (collision.gameObject == _target)
         {
             _isSocket = false;
         }
