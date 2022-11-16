@@ -12,13 +12,23 @@ public class Stove : MonoBehaviour
 
     public void bake()
     {
-        if (_stoveSocket._isSocket == true)
+        if (_stoveSocket._hasTarget == true)
         {
-           if(_pieTin.Cook())
-            {
-                _pieTin.gameObject.SetActive(false);
-                Instantiate(Pie, transform);
-            }
+            CheckStatus();
         }
+    }
+
+    public void CheckStatus()
+    {
+        if (_pieTin.Cookable())
+        {
+            MakePie();
+        }
+    }
+
+    public void MakePie()
+    {
+        _pieTin.gameObject.SetActive(false);
+        Instantiate(Pie, transform);
     }
 }

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 
 public class PieTinSocketManager : MonoBehaviour
 {
     public bool _isready;
+    [SerializeField] bool[] _ingredientList;
 
     [Header("Managed Sockets")]
 
@@ -19,14 +21,19 @@ public class PieTinSocketManager : MonoBehaviour
         _isready = false;
     }
 
-    public bool Cook()
+    public void Update()
+    {
+        
+    }
+
+    public bool Cookable()
     {
         if (_isready == false)
         {
-            if (S_1._isSocket == true)
-                if (S_2._isSocket == true)
-                    if (S_3._isSocket == true)
-                        if (S_4._isSocket == true)
+            if (S_1._hasTarget == true)
+                if (S_2._hasTarget == true)
+                    if (S_3._hasTarget == true)
+                        if (S_4._hasTarget == true)
 
                             _isready = true;
             return (true);
@@ -36,5 +43,14 @@ public class PieTinSocketManager : MonoBehaviour
            
             return (false);
         }
+    }
+    
+    public bool CheckContent()
+    {
+        if (_isready == false)
+        {
+             
+        }
+        return true;
     }
 }

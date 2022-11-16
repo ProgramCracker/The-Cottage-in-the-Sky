@@ -5,28 +5,30 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     [SerializeField] GameObject _target;
-    public bool _isSocket;
+    [SerializeField] GameObject _alternative;
+    public bool _hasTarget;
 
     private void Awake()
     {
-        _isSocket = false;
+        _hasTarget = false;
+        _alternative = null;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject == _target)
+
+        if (collision.gameObject == _target || collision.gameObject == _alternative)
         {
-            _isSocket = true;
+            _hasTarget = true;
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         
-        if (collision.gameObject == _target)
+        if (collision.gameObject == _target || collision.gameObject == _alternative)
         {
-            _isSocket = false;
+            _hasTarget = false;
         }
     }
 }
