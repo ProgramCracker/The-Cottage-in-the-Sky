@@ -8,8 +8,12 @@ public class Stove : MonoBehaviour
     [SerializeField] PieTinSocketManager _pieTin;
 
     [SerializeField] GameObject Pie;
+    [SerializeField] Vector3 _spawnLocation;
 
-
+    private void Awake()
+    {
+        Pie.SetActive(false);
+    }
     public void bake()
     {
         if (_stoveSocket._hasTarget == true)
@@ -28,7 +32,9 @@ public class Stove : MonoBehaviour
 
     public void MakePie()
     {
+        
+        //_pieTin.DestroyIngredients();
         _pieTin.gameObject.SetActive(false);
-        Instantiate(Pie, transform);
+        Pie.SetActive(true);
     }
 }

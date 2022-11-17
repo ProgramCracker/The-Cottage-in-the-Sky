@@ -9,7 +9,8 @@ public class PieTinSocketManager : MonoBehaviour
     public bool _isready;
     [SerializeField] bool[] _ingredientList;
     [Header("Managed Sockets")]
-    [SerializeField] CollisionCheck[] _collisionCheckList;
+    [SerializeField] public CollisionCheck[] _collisionCheckList;
+    public GameObject[] _objectList;
 
     
 
@@ -67,11 +68,24 @@ public class PieTinSocketManager : MonoBehaviour
 
     }
 
+    public void DestroyIngredients()
+    {
+
+        int num = _collisionCheckList.Length;
+
+        for (int i = 0; i < num; i++)
+        {
+            _objectList[i].SetActive(false);
+        }
+
+    }
+
     public void IngredientsReady(int num)
     {
        if ( _collisionCheckList[num]._hasTarget == true)
         {
             _ingredientList[num] = true;
+            //_objectList[num] = _collisionCheckList[num]._targetObject;
         }
     }
 

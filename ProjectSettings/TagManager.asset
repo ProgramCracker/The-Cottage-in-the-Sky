@@ -8,6 +8,10 @@ TagManager:
   - Trail
   - blade
   - igniter
+  - Slice
+  - Pietin
+  - Butter
+  - Pie
   layers:
   - Default
   - TransparentFX
