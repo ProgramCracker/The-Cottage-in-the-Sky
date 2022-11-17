@@ -20,7 +20,7 @@ public class Stove : MonoBehaviour
 
     public void CheckStatus()
     {
-        if (_pieTin.Cookable())
+        if (_pieTin.Cookable() == true)
         {
             MakePie();
         }
