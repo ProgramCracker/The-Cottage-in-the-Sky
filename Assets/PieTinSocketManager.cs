@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.XR.Interaction;
 
@@ -7,50 +8,85 @@ public class PieTinSocketManager : MonoBehaviour
 {
     public bool _isready;
     [SerializeField] bool[] _ingredientList;
-
     [Header("Managed Sockets")]
+    [SerializeField] CollisionCheck[] _collisionCheckList;
 
-    [SerializeField] CollisionCheck S_1;
-    [SerializeField] CollisionCheck S_2;
-    [SerializeField] CollisionCheck S_3;
-    [SerializeField] CollisionCheck S_4;
+    
+
+    //[SerializeField] CollisionCheck S_1;
+    //[SerializeField] CollisionCheck S_2;
+    //[SerializeField] CollisionCheck S_3;
+    //[SerializeField] CollisionCheck S_4;
     //[SerializedField] CollisionCheck S_1;
 
     private void Awake()
     {
         _isready = false;
-    }
-
-    public void Update()
-    {
-        
+        _ingredientList = new bool[_collisionCheckList.Length];
     }
 
     public bool Cookable()
     {
-        if (_isready == false)
+        if (CheckContent() == true)
         {
-            if (S_1._hasTarget == true)
-                if (S_2._hasTarget == true)
-                    if (S_3._hasTarget == true)
-                        if (S_4._hasTarget == true)
-
-                            _isready = true;
+            _isready = true;
             return (true);
         }
         else
         {
-           
             return (false);
         }
     }
     
     public bool CheckContent()
     {
-        if (_isready == false)
+        int num = _collisionCheckList.Length;
+
+        for (int i = 0; i < num; i++)
         {
-             
+           IngredientsReady(i);    
         }
-        return true;
+
+        bool missingIngredient = false;
+        for (int i = 0; i < num; i++)
+        {
+            if (CheckIngredientList(i) == false)
+            {
+                missingIngredient = true;  
+            }
+        }
+
+        if (missingIngredient == true)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
+
+    public void IngredientsReady(int num)
+    {
+       if ( _collisionCheckList[num]._hasTarget == true)
+        {
+            _ingredientList[num] = true;
+        }
+    }
+
+    public bool CheckIngredientList(int num)
+    {
+        if (_ingredientList[num] == true)
+        {
+            
+            return true;
+        }
+        else
+        {
+            
+            return false;
+        }
+    }
+
 }
